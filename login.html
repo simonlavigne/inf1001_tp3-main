@@ -1,0 +1,116 @@
+ </div> <!--div menu --> 
+<!--Auteur : Simon Lavigne , Mehdi El Jouhfi , Marc-Emmanuel Nattier , India Rioux; Noémie Boisclair  -->
+<!--Date : 09/11/2023-->
+<!--Description : Travail de groupe 2, INF 1001 -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="description" content="TP2 INF1001">
+        <title>UQTR - Travail de Groupe 1, INF 1001 </title>
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <script>
+function validate() {
+    event.preventDefault();
+
+    // Get the form values
+    var user = document.getElementById('user').value;
+    var password = document.getElementById('password').value;
+
+    // Check the form values
+    if (!user) {
+        alert("L'identifiant ne doit pas être vide");
+    } else if (!password) {
+        alert('Le mot de passe ne doit pas être vide');
+    } else {
+        // Create an object with the form data
+        var formData = new FormData();
+        formData.append('user', user);
+        formData.append('password', password);
+
+        // Send the form data to the PHP endpoint using fetch API
+        fetch('./login.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json()) // assuming the server responds with JSON
+        .then(data => {
+            // Check if the server response does not contain an error code
+            if (!data.error) {
+                // Redirect to admin.html
+                window.location.href = 'admin.html';
+            } else {
+                // Handle the error here (e.g., show an error message)
+                alert('Error Login In'); // assuming error message is in data.errorMessage
+                alert(data.errorMessage); // assuming error message is in data.errorMessage
+            }
+        })
+        .catch(error => {
+            // Handle any network errors here
+            console.error('Error:', error);
+        });
+    }
+}
+        </script>
+
+
+        <div id="banniere">
+            <h1>Loisir pour les <br> étudiants</h1>
+        </div> <!--div banniere --> 
+        <div id="menu">
+            <nav> 
+                <table style="width: 100%; ">
+                    <tr class="nav-item" >
+                        <td >
+                            <a href="index.html">Accueil</a>
+                            <table class="submenu">
+                                <tr>
+                                    <td><a href="carte.html">Localiser une activité</a></td>
+                                </tr>
+                                <!-- Ajoutez autant de lignes que nécessaire pour votre sous-menu -->
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <tr class="nav-item" >
+                                <td >
+                                    <a href="inscription.html">S'inscrire</a>
+                                    <table class="submenu">
+                                        <tr>
+                                            <td><a href="login.html">Authentification</a></td>
+                                        </tr>
+                                        <!-- Ajoutez autant de lignes que nécessaire pour votre sous-menu -->
+                                    </table>
+                                </td>
+                            </tr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                </table>
+            </nav>
+        </div> <!--div menu --> 
+        
+ <div id="contenu">
+            <form id="myform" action="/login.php" onsubmit="return validate()">
+                <h2>Connexion</h2>
+                <p> Veuillez renseigner vos identifiants pour vous connecter</p>
+            <p>
+            <label for="lnom">Identifiant </label>
+            <br><input type="text" name="user" id="user" size="50" maxlength="50"/>
+            </p>
+            <p>
+            <label for="fnom">Mot de passe </label>
+            <br><input type="password" name="password" id="password" size="50" maxlength="50" />
+    
+            <br>
+            <button type="submit">Se Connecter</button>
+    </form>
+            </p>
+            
+            

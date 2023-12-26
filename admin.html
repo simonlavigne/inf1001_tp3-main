@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="description" content="TP2 INF1001">
+    <title>Admin Dashboard </title>
+    <link href="css/main.css" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+        // this send a 
+        function delete_activity(id) 
+        {
+            console.log('delete_activity(' + id + ')');
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'delete_activity.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                // Handle response by reloading the page
+                location.reload();
+                
+            };
+            xhr.send('id=' + id);
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('admin.php')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Handle activities data
+                    // activitte table must be retrieved from the DOM div id = tableau_activite
+                    let activitiesTable = document.getElementById('tableau_activite');
+    
+                    // add a new row inside the activitiesTable with insertRow
+                    // add 4 cells to the row with insertCell
+                    data.activities.forEach(activity => {
+                        
+                        var row = activitiesTable.insertRow();
+                        var cell1 = row.insertCell();
+                        var cell2 = row.insertCell();
+                        var cell3 = row.insertCell();
+                        var cell4 = row.insertCell();
+                        var cell5 = row.insertCell();
+    
+                        //Id
+                        cell1.innerHTML = activity.id;
+                        //Activite
+                        cell2.innerHTML = activity.name;
+                        //Responsable
+                        cell3.innerHTML = activity.responsable;
+                        cell4.innerHTML = activity.max_places;
+    
+                        // add a delete button inside the cell5() with innerHTML
+                        cell5.innerHTML = `<button onclick="delete_activity(${activity.id})">Supprimer</button>`;
+                    });
+    
+                    // Handle inscriptions data
+                    let inscriptionsTable = document.getElementById('tableau_details');
+                    data.inscriptions.forEach(inscription => {
+                        //add a new row inside the inscriptionTable
+                        // add 3 cells to the row
+                        var rowtbd = inscriptionsTable.insertRow();
+                        var cell0tbd = rowtbd.insertCell();
+                        var cell1tbd = rowtbd.insertCell();
+                        var cell2tbd = rowtbd.insertCell();
+                        var cell3tbd = rowtbd.insertCell();
+    
+                        // add a circle/pie chart inside the cell3 animated with the percentageFilled
+                        cell0tbd.innerHTML = inscription.id;
+                        cell1tbd.innerHTML = inscription.name;
+                        cell2tbd.innerHTML = inscription.remainingPlaces;
+                        cell3tbd.innerHTML = inscription.percentageFilled;
+                    });
+                })
+                .catch(error => {
+                    document.body.innerHTML += `<p>Error retrieving data: ${error.message}</p>`;
+                });
+        });
+        </script> 
+        <div id="banniere">
+            <h1>Loisir pour les <br> étudiants</h1>
+        </div> <!--div banniere --> 
+ 
+        <div id="menu">
+            <nav> 
+                <table style="width: 100%; ">
+                    <tr class="nav-item" >
+                        <td >
+                            <a href="index.html">Accueil</a>
+                            <table class="submenu">
+                                <tr>
+                                    <td><a href="carte.html">Localiser une activité</a></td>
+                                </tr>
+                                <!-- Ajoutez autant de lignes que nécessaire pour votre sous-menu -->
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <tr class="nav-item" >
+                                <td >
+                                    <a href="inscription.html">S'inscrire</a>
+                                    <table class="submenu">
+                                        <tr>
+                                            <td><a href="login.html">Authentification</a></td>
+                                        </tr>
+                                        <!-- Ajoutez autant de lignes que nécessaire pour votre sous-menu -->
+                                    </table>
+                                </td>
+                            </tr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                </table>
+            </nav>
+        </div> <!--div menu --> 
+
+        <div id="contenu">
+
+            <h1>Welcome, admin!</h1>
+            <button onclick="location.href='./activite.html'">Ajouter une activité</button>
+            <button onclick="location.href='./index.html'">Se déconnecté </button>
+            <br>
+        
+           
+            <div >
+                <h2>Détails des activité</h2>
+                <table border="1" id = "tableau_activite" style="width: 75%;" >
+                    <tr>
+                        <th>Id</th>
+                        <th>Activité</th>
+                        <th>Responsable</th>
+                        <th>Nombre de places</th>
+                        <th>Supression</th>
+                        
+                    </tr>
+                </table>
+            </div>
+            <div >
+                <h2>Détails des descriptions</h2>
+                <table border="1" id = "tableau_details" style="width: 75%;">
+                    <tr>
+                        <th>ID</th>
+                        <th>Activité</th>
+                        <th>Place Restantes</th>
+                        <th>pourcentage</th>                        
+                    </tr>
+                </table>    
+            </div>       
+
+        </div> <!--div Contenu --> 
+    </body>

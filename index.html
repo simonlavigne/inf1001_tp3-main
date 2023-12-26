@@ -1,0 +1,130 @@
+<!--Auteur : Simon Lavigne , Mehdi El Jouhfi , Marc-Emmanuel Nattier , India Rioux, Noémie Boisclair  -->
+<!--Date : 09/11/2023-->
+<!--Description : Travail de groupe 2, INF 1001 -->
+
+<DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="description" content="TP1 INF1001">
+        <title>UQTR - Travail de Groupe 1, INF 1001 </title>
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <script> 
+            console.log('DOMContentLoaded');      
+            document.addEventListener('DOMContentLoaded', function() {
+                fetch('index_activite.php')
+                    .then(response => {
+                        if (!response.ok) {
+                            console.log('Network response was not ok');   
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data);
+                        // Check for an error in the response
+                        if (data.error) {
+                            console.log('Error loading data'); 
+                            alert('Error loading data');
+                            return;
+                        }
+                        // Handle activities table
+                        let activitetable = document.getElementById('activite');
+                        // Add the options to the datalist
+                        data.activities.forEach(activity => {
+                            console.log(activity);
+                            var rowtbd = activitetable.insertRow();
+
+                            var cell0tbd = rowtbd.insertCell();
+                            var cell1tbd = rowtbd.insertCell();
+                            var cell2tbd = rowtbd.insertCell();
+                            var cell3tbd = rowtbd.insertCell();
+
+                            cell0tbd.innerHTML = activity.id
+                            cell1tbd.innerHTML = activity.name
+                            cell2tbd.innerHTML = activity.responsable
+                            cell3tbd.innerHTML = activity.num_inscriptions
+                        });
+                    })
+                    .catch(error => {
+                        alert('Error ');
+                    });
+            });
+
+        </script>
+
+        <div id="banniere">
+            <h1>Loisir pour les <br> étudiants</h1>
+        </div> <!--div banniere --> 
+ 
+        <div id="menu">
+            <nav> 
+                <table style="width: 100%; ">
+                    <tr class="nav-item" >
+                        <td >
+                            <a href="index.html">Accueil</a>
+                            <table class="submenu">
+                                <tr>
+                                    <td><a href="carte.html">Localiser une activité</a></td>
+                                </tr>
+                                <!-- Ajoutez autant de lignes que nécessaire pour votre sous-menu -->
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <tr class="nav-item" >
+                                <td >
+                                    <a href="inscription.html">S'inscrire</a>
+                                    <table class="submenu">
+                                        <tr>
+                                            <td><a href="login.html">Authentification</a></td>
+                                        </tr>
+                                        <!-- Ajoutez autant de lignes que nécessaire pour votre sous-menu -->
+                                    </table>
+                                </td>
+                            </tr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                </table>
+            </nav>
+        </div> <!--div menu --> 
+
+        <div id="contenu">
+            <h2>Notre but :</h2>
+                
+            <p>
+               Notre site propose aux étudiants désireux de réaliser une ou plusieurs activités de loisir de rejoindre les diférentes 
+               activités proposées dans la liste suivantes en 3 étapes
+            </p>
+
+            <ul>
+                <li>S'inscrire</li>
+                <li>Choisir une ou plusieurs activités</li>
+                <li>Commencer les activités en groupe</li>
+            </ul>
+
+            <p>
+               Les différentes activités des groupes sont la responsabilité des professionnelles. Il s'agit des passionnés de doomaines 
+               qui vous feront découvrir des pans inédits de vos loisirs préfèré.Qu'attendez-vous...? Rejoignez-nous!
+            </p>
+
+            <h2>Liste des activités disponibles</h2>
+                
+            <table id="activite">
+                <tr>
+                    <th>#</th>
+                    <th>Activité</th>
+                    <th>Responsable</th>
+                    <th>Nombre d'inscrits</th>
+                </tr>  
+
+            </table>
+        </div> <!--div Contenu --> 
+    </body>
+</html>

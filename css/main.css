@@ -1,0 +1,179 @@
+/*
+    Auteur : Simon Lavigne , Mehdi El Jouhfi , Marc-Emmanuel Nattier , India Rioux
+    Date : 28/09/2023
+    Description : Travail de groupe 1, INF 1001 
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*
+    -- Définition de bordure solide , arrondie et de couleur noire (border , border-style , border-radius , border-color)
+    -- ajout d'un padding de 0.5% pour garantir un espacement entre le contenu et la division (padding)
+*/
+div {
+    padding: 0.5%;
+    margin-bottom: 0.5%;
+}
+
+/*
+ -- Ajout d'une image de fond et ajustement de la taille et du=e la position (background-image , background-size , background-repeat , background-position)
+ -- Définition de la hauteur et de la largeur de la bannière (height). Pas besoin de définir une largeur , car le contenu est justifier vers la droite (justify-content).
+ -- Ajout d'une marge de 0.5% pour garantir un espacement entre les bordures des div du bas (margin)
+ -- Définition de la boite de dimensionnement pour inclure les bordures et le padding dans la largeur et la hauteur (box-sizing)
+ -- Définition de l'affichage en flex pour permettre de centrer le texte verticalement et horizontalement (display , justify-content , align-items)
+*/
+#banniere{
+    background-image: url("../img/uqtr.png");
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+    background-position: left;
+	height: 200px;
+    margin-bottom: 0.5%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100% ;
+
+    border: solid;
+	border-style: groove;
+	border-radius: 10px;
+	border-color: #000000;
+
+}
+
+/*
+    -- Définition de la taille de la police (font-size)
+*/
+#banniere h1{
+    font-size: 24px;
+}
+
+/*
+    -- Position vers la gauche (float)
+    -- Définition de la taille de la police (font-size)
+    -- Définition de la largeur de manière relative % (width)
+    -- Définition de la boite de dimensionnement pour inclure les bordures et le padding dans la largeur et la hauteur (box-sizing)
+    -- Ajout d'une marge de 0.25% à droite pour éviter que les bordures soient trop proches (margin-right)
+*/
+#menu{
+    float: left;
+	font-size: 12px;
+    width: 24.5%;
+    box-sizing: border-box;
+    margin-right: 0.25%;
+    border: solid;
+	border-style: groove;
+	border-radius: 10px;
+	border-color: #000000;
+}
+
+#menu td{
+    border: none
+}
+
+/*
+    -- Position du coté droit (float)
+    -- Définition de la taille de la police (font-size)
+    -- Définition de la largeur de manière relative % (width)
+    -- Définition de la boite de dimensionnement pour inclure les bordures et le padding dans la largeur et la hauteur (box-sizing)
+    -- Ajout d'une marge de 0.25%  pour éviter que les bordures soient trop proches (margin-left)
+*/
+#contenu{
+    float: right;
+    font-size: 12px;
+    width: 75%;
+    box-sizing: border-box;
+    margin-left: 0.25%;
+    border: solid;
+	border-style: groove;
+	border-radius: 10px;
+	border-color: #000000;
+
+}
+
+/*
+    -- La table prends l'espace disponible dans la division 'contenu'
+*/
+#activite {
+    width: 100%;
+}
+
+/*
+    -- Définition du style de la bordure (border)
+    -- Définition de la couleur de la bordure (border-color)
+    -- Définition de la taille de la police (font-size)
+*/
+#activite th, td{
+    border:1px solid;
+    border-color: #000000;
+    font-size: 12px;
+}
+
+/*
+/* Définir les couleurs de fond et de texte par défaut */
+.nav-item {
+    background-color: #ffffff; /* Couleur de fond par défaut */
+    color: #000000; /* Couleur de texte par défaut */
+}
+
+/* Changer les couleurs et le style de texte lors du survol */
+.nav-item:hover {
+    background-color: rgb(0, 0, 0); /* Couleur de fond lors du survol */
+    color: #ffffff; /* Couleur de texte lors du survol */
+    font-weight: bold; /* Texte en gras lors du survol */
+    cursor: pointer; /* Curseur en forme de pointeur lors du survol */
+}
+
+/* Cacher le sous-menu par défaut */
+.nav-item .submenu {
+    display: none;
+}
+
+/* Montrer le sous-menu lors du survol */
+.nav-item:hover .submenu {
+    display: block;
+}
+
+/* all nav items must have a font size of 18px */
+nav {
+    font-size: 18px;
+}
+
+a {
+    font-size: 16px;;
+}
+
+nav * :hover{
+    font-weight: bold;
+    color: #ffffff; /* Couleur de texte lors du survol */
+}
+
+.motivation{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    gap: 10px;
+    border: none;
+}
+
+.form-group {
+    margin-bottom: 2px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 2px;
+}
+
+.form-group input, .form-group textarea, .form-group datalist {
+    display: block;
+    width: 25%;
+}
+
+.form-actions {
+    margin-top: 2px;
+}

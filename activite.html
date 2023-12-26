@@ -1,0 +1,103 @@
+ </div> <!--div menu --> 
+<!--Auteur : Simon Lavigne , Mehdi El Jouhfi , Marc-Emmanuel Nattier , India Rioux, Noémie Boisclair  -->
+<!--Date : 09/11/2023-->
+<!--Description : Travail de groupe 2, INF 1001 -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="description" content="TP2 INF1001">
+        <title>UQTR - Travail de Groupe 1, INF 1001 </title>
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <script>
+            function validate() {
+                event.preventDefault();
+
+                // Get the form values
+                var responsable = document.getElementById('responsable').value;
+                var max_place = document.getElementById('max_places').value;
+                var activite = document.querySelector('input[list="activite"]').value;
+
+                // Check the form values
+                if (!activite) {
+                    alert("L'activité ne doit pas être vide");
+                } else if (!responsable) {
+                    alert('Le responsable ne doit pas être vide');
+                } else if (!max_place) {
+                    alert('Le maximum ne doit pas être vide');
+                } else {
+                    // If all fields are valid, submit the form
+                    alert('Validation ok. Formulaire en soumission.');
+                    document.querySelector('form').submit();
+                }
+        }
+        </script>
+
+
+        <div id="banniere">
+            <h1>Loisir pour les <br> étudiants</h1>
+        </div> <!--div banniere --> 
+        <div id="menu">
+            <nav> 
+                <table style="width: 100%; ">
+                    <tr class="nav-item" >
+                        <td >
+                            <a href="index.html">Accueil</a>
+                            <table class="submenu">
+                                <tr>
+                                    <td><a href="carte.html">Localiser une activité</a></td>
+                                </tr>
+                                <!-- Ajoutez autant de lignes que nécessaire pour votre sous-menu -->
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <tr class="nav-item" >
+                                <td >
+                                    <a href="inscription.html">S'inscrire</a>
+                                    <table class="submenu">
+                                        <tr>
+                                            <td><a href="login.html">Authentification</a></td>
+                                        </tr>
+                                        <!-- Ajoutez autant de lignes que nécessaire pour votre sous-menu -->
+                                    </table>
+                                </td>
+                            </tr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                </table>
+            </nav>
+        </div> <!--div menu -->    
+ <div id="contenu">
+            <form id="myform" action="./activite.php" method="post" onsubmit="return validate()">
+                <h2>Ajouter une activitée</h2>
+                <input list="activite" name="activite">
+                <datalist id="activite">
+                    <option value="Randonnée">
+                    <option value="Badminton">
+                    <option value="Natation">
+                    <option value="kayak">
+                    <option value="Vélo">
+                    <option value="Échecs">
+                </datalist>
+            <p>
+            <label for="responsable">Reponsable </label>
+            <br><input type="text" name="responsable" id="responsable" size="50" maxlength="50"/>
+            </p>
+            <p>
+            <label for="max_place">Maximum </label>
+            <br><input type="text" name="max_places" id="max_places" size="50" maxlength="50"/>
+            <br>
+            <button type="submit">Soumettre</button>
+            <input type="reset" value="Annuler">
+    </form>
+</div> <!--div contenu -->
+</body>
+</html>

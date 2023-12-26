@@ -1,0 +1,160 @@
+<!--Auteur : Simon Lavigne , Mehdi El Jouhfi , Marc-Emmanuel Nattier , India Rioux, Noémie Boisclair  -->
+<!--Date : 09/11/2023-->
+<!--Description : Travail de groupe 2, INF 1001 -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="description" content="TP2 INF1001">
+        <title>UQTR - Travail de Groupe 1, INF 1001 </title>
+        <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <script>
+            function validate() {
+                event.preventDefault();
+
+                // Get the form values
+                var nom = document.getElementById('lnom').value;
+                var prenom = document.getElementById('fnom').value;
+                var dateNaissance = document.querySelector('input[type="date"]').value;
+                var sexe = document.querySelector('input[name="sexe"]:checked');
+                var activites = document.querySelector('input[list="activite"]').value;
+
+                // Check the form values
+                if (!nom) {
+                    alert('Le nom ne doit pas être vide');
+                } else if (!prenom) {
+                    alert('Le prénom ne doit pas être vide');
+                } else if (!dateNaissance) {
+                    alert('La date de naissance ne doit pas être vide');
+                } else if (!sexe) {
+                    alert('Le sexe doit être sélectionné');
+                } else if (!activites) {
+                    alert('Une activité doit être sélectionnée');
+                } else {
+                    // If all fields are valid, submit the form
+                    alert('Validation ok. Formulaire en soumission.');
+                    document.querySelector('form').submit();
+                }
+        }
+        </script>
+
+        <script>       
+            document.addEventListener('DOMContentLoaded', function() {
+                fetch('activite_active.php')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Check for an error in the response
+                        if (data.error) {
+                            alert('Error loading data');
+                            return;
+                        }
+                        // Handle activities data
+                        let activiteDataList = document.getElementById('activite');
+                        // Add the options to the datalist
+                        data.forEach(activity => {
+                            var option = document.createElement('option');
+                            option.value = activity.id + "-" + activity.name;
+                            activiteDataList.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        alert('Error ');
+                    });
+            });
+        </script>
+
+
+        <div id="banniere">
+            <h1>Loisir pour les <br> étudiants</h1>
+        </div> <!--div banniere --> 
+        <div id="menu">
+            <nav> 
+                <table style="width: 100%; ">
+                    <tr class="nav-item" >
+                        <td >
+                            <a href="index.html">Accueil</a>
+                            <table class="submenu">
+                                <tr>
+                                    <td><a href="carte.html">Localiser une activité</a></td>
+                                </tr>
+                                <!-- Ajoutez autant de lignes que nécessaire pour votre sous-menu -->
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <tr class="nav-item" >
+                                <td >
+                                    <a href="inscription.html">S'inscrire</a>
+                                    <table class="submenu">
+                                        <tr>
+                                            <td><a href="login.html">Authentification</a></td>
+                                        </tr>
+                                        <!-- Ajoutez autant de lignes que nécessaire pour votre sous-menu -->
+                                    </table>
+                                </td>
+                            </tr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                </table>
+            </nav>
+        </div> <!--div menu --> 
+
+        <div id="contenu">
+            <form id="myform" action="inscription.php" method="post" onsubmit="return validate()">
+                <h2>Inscrivez-vous</h2>
+                <div class="form-group">
+                    <label for="lnom">Nom: </label>
+                    <input type="text" name="lnom" id="lnom" size="50" maxlength="50"/>
+                </div>
+            
+                <div class="form-group">
+                    <label for="fnom">Prénom: </label>
+                    <input type="text" name="fnom" id="fnom" size="50" maxlength="50"/>
+                </div>
+            
+                <div class="form-group">
+                    <label for="bdate">Date de naissance</label>
+                    <input id="bdate" name="bdate" type="date">
+                </div>
+            
+                <div>     
+                        <legend>Sexe</legend>
+                        <input type="radio" id="homme" name="sexe" value="Homme">
+                        <label for="homme">Homme</label>
+                        <input type="radio" id="femme" name="sexe" value="Femme">
+                        <label for="femme">Femme</label>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="activite">Activité</label>
+                    <input list="activite" name="activite">
+                    <datalist id="activite">
+                    </datalist>
+                </div>
+            
+                <div class="form-group ">
+                    <label for="motiv">Motivation</label>
+                    <textarea name="motiv" id="motiv" style=" height:50px ; width: 50%;"></textarea>
+                </div>
+            
+                <div class="form-actions">
+                    <input type="reset" value="Réinitialiser">
+                    <input type="submit" value="Valider">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
